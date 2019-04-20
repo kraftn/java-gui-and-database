@@ -2,9 +2,12 @@ package ru.overtired.javafx.sample3.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.overtired.javafx.sample3.models.User;
+import ru.overtired.javafx.sample3.models.CategoryOfGoods;
+import ru.overtired.javafx.sample3.models.Goods;
+import ru.overtired.javafx.sample3.models.Unpaid;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +41,8 @@ public class HibernateManager {
         }
 
         Configuration configuration = new Configuration();
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Goods.class);
+        configuration.addAnnotatedClass(CategoryOfGoods.class);
         configuration.addProperties(dbConnectionProperties);
 
         return configuration.buildSessionFactory();
@@ -56,8 +60,21 @@ public class HibernateManager {
        entityManager.persist(entity);
     }
 
-    public List<User> getAllUsers() {
-        TypedQuery<User> userQuery = entityManager.createQuery("Select u from User u", User.class);
+    public List<Goods> getAllGoods() {
+        TypedQuery<Goods> userQuery = entityManager.createQuery("Select u from Goods u", Goods.class);
         return userQuery.getResultList();
+    }
+
+    public Goods getGood(){
+        return entityManager.find(Goods.class, 1);
+    }
+
+    public CategoryOfGoods getCategoryOfGood(){
+        return entityManager.find(CategoryOfGoods.class, 1);
+    }
+
+    public List<Unpaid> getUnpaid() {
+        Query nativeQuery = entityManager.createNativeQuery("execute GetNotPaidDuties", "unpaid");
+        return nativeQuery.getResultList();
     }
 }

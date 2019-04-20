@@ -4,12 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
 
-<FlowPane alignment="CENTER" hgap="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-          minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="50.0"
-          fx:controller="ru.overtired.javafx.sample2.ClickerController"
-          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane alignment="CENTER" hgap="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="50.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.overtired.javafx.sample2.ClickerController">
     <children>
-        <Button onAction="#doThisOnClick" text="button"/>
-        <Label fx:id="text" text="Click on button"/>
+        <Button onAction="#doThisOnClick" text="button" />
+        <Label fx:id="text" text="Click on button" />
     </children>
 </FlowPane>

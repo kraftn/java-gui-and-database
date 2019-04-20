@@ -5,14 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.overtired.javafx.sample3.database.H2Database;
 
 import java.io.IOException;
 
 public class ThirdSampleApp extends Application {
 
     public static void main(String[] args) {
-        H2Database.initDatabase();
         ThirdSampleApp.launch(args);
     }
 

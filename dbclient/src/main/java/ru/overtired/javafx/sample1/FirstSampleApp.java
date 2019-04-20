@@ -11,6 +11,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
+
 public class FirstSampleApp extends Application {
 
     private int clickCounter = 0;
@@ -22,6 +24,7 @@ public class FirstSampleApp extends Application {
         button.setText("button");
         button.setOnAction(eventHandler);
         button.setPadding(new Insets(10));
+        button.setLayoutX(0);
 
         text = new Text("Click on button, please");
         final FlowPane root = new FlowPane(button, text);
