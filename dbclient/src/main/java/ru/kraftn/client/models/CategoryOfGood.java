@@ -1,15 +1,15 @@
-package ru.overtired.javafx.sample3.models;
+package ru.kraftn.client.models;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Category_Of_Goods")
-public class CategoryOfGoods {
+public class CategoryOfGood {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Number")
-    private int number;
+    private int id;
 
     @Column(name = "Name", nullable = false)
     private String name;
@@ -18,15 +18,21 @@ public class CategoryOfGoods {
     private String description;
 
     @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "Category", nullable = false, insertable = false, updatable = false)
-    private List<Goods> goods;
+    @JoinColumn(name = "Category", insertable = true, updatable = true)
+    private List<Good> goods;
 
-    public int getNumber() {
-        return number;
+    @ManyToMany
+    @JoinTable(name = "Documents_For_Category",
+            joinColumns = @JoinColumn(name = "Category"),
+            inverseJoinColumns = @JoinColumn(name = "Document"))
+    private List<Document> documents;
+
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,12 +51,16 @@ public class CategoryOfGoods {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return name;
+    public List<Good> getGoods() {
+        return goods;
     }
 
-    public List<Goods> getGoods() {
-        return goods;
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    @Override
+    public String toString(){
+        return name;
     }
 }

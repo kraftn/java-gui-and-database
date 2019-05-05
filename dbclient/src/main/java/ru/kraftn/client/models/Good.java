@@ -1,10 +1,13 @@
-package ru.overtired.javafx.sample3.models;
+package ru.kraftn.client.models;
+
+import ru.kraftn.client.utils.AbleToGiveId;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "Goods")
+
+//Mapping результата выполнения процедур
 @SqlResultSetMapping(
         name = "unpaid",
         classes = @ConstructorResult(
@@ -18,7 +21,19 @@ import java.time.LocalDate;
                 }
         )
 )
-public class Goods {
+
+@SqlResultSetMapping(
+        name = "userInformation",
+        classes = @ConstructorResult(
+                targetClass = UserInformation.class,
+                columns = {
+                        @ColumnResult(name = "UserName", type = String.class),
+                        @ColumnResult(name = "RoleName", type = String.class),
+                }
+        )
+)
+
+public class Good implements AbleToGiveId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -32,7 +47,7 @@ public class Goods {
 
     @ManyToOne
     @JoinColumn(name = "Category", nullable = false)
-    private CategoryOfGoods category;
+    private CategoryOfGood category;
 
     public int getId() {
         return id;
@@ -58,16 +73,16 @@ public class Goods {
         this.countryOfOrigin = countryOfOrigin;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s из %s c категорией \"%s\"", name, countryOfOrigin, category.getName());
-    }
-
-    public CategoryOfGoods getCategory() {
+    public CategoryOfGood getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryOfGoods category) {
+    public void setCategory(CategoryOfGood category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

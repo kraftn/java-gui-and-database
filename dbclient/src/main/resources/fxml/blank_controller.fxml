@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bpLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kraftn.client.controllers.BlankController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Разделы">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showTableDeclarants" text="Декларанты" />
+                  <MenuItem mnemonicParsing="false" onAction="#showTableGoods" text="Товары" />
+                  <Menu mnemonicParsing="false" text="Прохождение товаров">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#showTableCustomsProcedures" text="Заявления" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTableDuties" text="Пошлины" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTableDocuments" text="Поданные документы" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTableResults" text="Результаты рассмотрения" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#showTableCooperators" text="Сотрудники" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Операции" />
+          <Menu mnemonicParsing="false" text="Выход">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#close" text="Выйти" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Добро пожаловать. Выберите пункт меню" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

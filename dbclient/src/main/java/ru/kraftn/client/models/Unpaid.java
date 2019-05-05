@@ -1,9 +1,4 @@
-package ru.overtired.javafx.sample3.models;
-
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
-import javax.persistence.SqlResultSetMapping;
-
+package ru.kraftn.client.models;
 
 public class Unpaid {
     private Integer procedure;
@@ -62,6 +57,6 @@ public class Unpaid {
 
     @Override
     public String toString() {
-        return String.format("%s %d %s %d", name, valueOfDuty, unit, sum);
+        return String.format("%s %d%s %d", name, valueOfDuty, unit, sum);
     }
 }
