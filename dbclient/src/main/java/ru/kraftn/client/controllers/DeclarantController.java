@@ -4,8 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import ru.kraftn.client.models.Cooperator;
+import ru.kraftn.client.models.Declarant;
 import ru.kraftn.client.navigation.NavigationManager;
 import ru.kraftn.client.utils.HibernateManager;
 import ru.kraftn.client.utils.TableManager;
@@ -14,7 +13,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CooperatorController implements Initializable {
+public class DeclarantController implements Initializable {
     @FXML
     private TextField tfSurname;
     @FXML
@@ -22,11 +21,15 @@ public class CooperatorController implements Initializable {
     @FXML
     private TextField tfPatronymic;
     @FXML
-    private TextField tfPosition;
+    private TextField tfNationality;
+    @FXML
+    private TextField tfTypeDocument;
+    @FXML
+    private TextField tfNumberDocument;
+    @FXML
+    private TextField tfPhone;
 
-    public Cooperator data;
-
-    public CooperatorController(){}
+    public Declarant data;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -34,19 +37,25 @@ public class CooperatorController implements Initializable {
             tfSurname.setText(data.getSurname());
             tfName.setText(data.getName());
             tfPatronymic.setText(data.getPatronymic());
-            tfPosition.setText(data.getPosition());
+            tfNationality.setText(data.getNationality());
+            tfTypeDocument.setText(data.getTypeOfIdentifyDocument());
+            tfNumberDocument.setText(data.getDocumentNumber());
+            tfPhone.setText(data.getContactPhone());
         }
     }
 
     @FXML
     public void onOk(){
         if (null == data){
-            data = new Cooperator();
+            data = new Declarant();
         }
         data.setName(tfName.getText());
         data.setSurname(tfSurname.getText());
         data.setPatronymic(tfPatronymic.getText());
-        data.setPosition(tfPosition.getText());
+        data.setNationality(tfNationality.getText());
+        data.setTypeOfIdentifyDocument(tfTypeDocument.getText());
+        data.setDocumentNumber(tfNumberDocument.getText());
+        data.setContactPhone(tfPhone.getText());
 
         HibernateManager hibernate = HibernateManager.getInstance();
 
@@ -54,8 +63,8 @@ public class CooperatorController implements Initializable {
         hibernate.save(data);
         hibernate.endTransaction();
 
-        List<Cooperator> content = hibernate.getAllObjects(Cooperator.class);
-        TableView<Cooperator> table = TableManager.getTableWithContent(TableManager.headerCooperator, Cooperator.class,
+        List<Declarant> content = hibernate.getAllObjects(Declarant.class);
+        TableView<Declarant> table = TableManager.getTableWithContent(TableManager.headerDeclarant, Declarant.class,
                 content);
         NavigationManager.from(tfSurname).goToTableScene(table);
     }
@@ -63,8 +72,8 @@ public class CooperatorController implements Initializable {
     @FXML
     public void onCancel(){
         HibernateManager hibernate = HibernateManager.getInstance();
-        List<Cooperator> content = hibernate.getAllObjects(Cooperator.class);
-        TableView<Cooperator> table = TableManager.getTableWithContent(TableManager.headerCooperator, Cooperator.class,
+        List<Declarant> content = hibernate.getAllObjects(Declarant.class);
+        TableView<Declarant> table = TableManager.getTableWithContent(TableManager.headerDeclarant, Declarant.class,
                 content);
         NavigationManager.from(tfSurname).goToTableScene(table);
     }

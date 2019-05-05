@@ -78,11 +78,11 @@ public class HibernateManager {
         password = newPassword;
     }
 
-    public String getLoginName() {
+    public static String getLoginName() {
         return loginName;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
 
@@ -100,7 +100,7 @@ public class HibernateManager {
         return userInformation.getUserName();
     }
 
-    public List<UserInformation> getUserInformation() {
+    private List<UserInformation> getUserInformation() {
         Query nativeQuery = entityManager.createNativeQuery(
                 "declare @x nvarchar(128); set @x = (select USER_NAME()); execute sp_helpuser @x;",
                 "userInformation");
