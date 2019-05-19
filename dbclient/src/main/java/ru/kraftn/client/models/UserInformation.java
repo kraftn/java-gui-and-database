@@ -3,10 +3,12 @@ package ru.kraftn.client.models;
 public class UserInformation {
     private String userName;
     private String roleName;
+    private String loginName;
 
-    public UserInformation(String userName, String roleName) {
+    public UserInformation(String userName, String roleName, String loginName) {
         this.userName = userName;
         this.roleName = roleName;
+        this.loginName = loginName;
     }
 
     public String getUserName() {
@@ -23,5 +25,13 @@ public class UserInformation {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 }

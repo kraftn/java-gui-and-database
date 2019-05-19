@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "List_Of_Documents")
-public class Document {
+public class Document implements AbleToGiveId{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -20,9 +20,9 @@ public class Document {
             inverseJoinColumns = @JoinColumn(name = "Category"))
     private List<CategoryOfGood> categoriesOfGood;
 
-    @OneToMany(orphanRemoval = true)
+    /*@OneToMany(orphanRemoval = true)
     @JoinColumn(name = "Type_Of_Document")
-    List<SubmittedDocument> submittedDocuments;
+    List<SubmittedDocument> submittedDocuments;*/
 
     public int getId() {
         return id;
@@ -44,9 +44,9 @@ public class Document {
         return categoriesOfGood;
     }
 
-    public List<SubmittedDocument> getSubmittedDocuments() {
+    /*public List<SubmittedDocument> getSubmittedDocuments() {
         return submittedDocuments;
-    }
+    }*/
 
     @Override
     public String toString() {

@@ -1,9 +1,7 @@
 package ru.kraftn.client.models;
 
-import ru.kraftn.client.utils.AbleToGiveId;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Result_Of_Procedure")
@@ -16,15 +14,15 @@ public class ResultOfProcedure implements AbleToGiveId {
     private String result;
 
     @Column(name = "Date_Of_Result", nullable = false)
-    private LocalDateTime dateOfResult;
+    private LocalDate dateOfResult;
 
     @ManyToOne
     @JoinColumn(name = "Cooperator", nullable = false)
     private Cooperator cooperator;
 
-    @OneToOne
+    /*@OneToOne
     @PrimaryKeyJoinColumn
-    private CustomsProcedure procedure;
+    private CustomsProcedure procedure;*/
 
     public int getId() {
         return id;
@@ -42,11 +40,11 @@ public class ResultOfProcedure implements AbleToGiveId {
         this.result = result;
     }
 
-    public LocalDateTime getDateOfResult() {
+    public LocalDate getDateOfResult() {
         return dateOfResult;
     }
 
-    public void setDateOfResult(LocalDateTime dateOfResult) {
+    public void setDateOfResult(LocalDate dateOfResult) {
         this.dateOfResult = dateOfResult;
     }
 
@@ -58,13 +56,13 @@ public class ResultOfProcedure implements AbleToGiveId {
         this.cooperator = cooperator;
     }
 
-    public CustomsProcedure getProcedure() {
+    /*public CustomsProcedure getProcedure() {
         return procedure;
-    }
+    }*/
 
-    public void setProcedure(CustomsProcedure procedure) {
+    /*public void setProcedure(CustomsProcedure procedure) {
         this.procedure = procedure;
-    }
+    }*/
 
     @Override
     public String toString() {

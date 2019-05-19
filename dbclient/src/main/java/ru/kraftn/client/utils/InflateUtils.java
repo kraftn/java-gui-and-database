@@ -1,8 +1,11 @@
 package ru.kraftn.client.utils;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.util.Callback;
+import org.hibernate.service.spi.ServiceException;
 
 import java.io.IOException;
 
@@ -36,5 +39,13 @@ public class InflateUtils {
         } catch (IOException e) {
             throw new RuntimeException("Could not load fxml: " + resource, e);
         }
+    }
+
+    public static void createAndShowAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Ошибка");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

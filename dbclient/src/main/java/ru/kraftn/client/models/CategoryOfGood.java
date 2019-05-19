@@ -1,11 +1,12 @@
 package ru.kraftn.client.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Category_Of_Goods")
-public class CategoryOfGood {
+public class CategoryOfGood implements AbleToGiveId{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Number")
@@ -17,15 +18,19 @@ public class CategoryOfGood {
     @Column(name = "Description", nullable = false)
     private String description;
 
-    @OneToMany(orphanRemoval = true)
+    /*@OneToMany(orphanRemoval = true)
     @JoinColumn(name = "Category", insertable = true, updatable = true)
-    private List<Good> goods;
+    private List<Good> goods;*/
 
     @ManyToMany
     @JoinTable(name = "Documents_For_Category",
             joinColumns = @JoinColumn(name = "Category"),
             inverseJoinColumns = @JoinColumn(name = "Document"))
     private List<Document> documents;
+
+    public CategoryOfGood(){
+        documents = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -51,9 +56,9 @@ public class CategoryOfGood {
         this.description = description;
     }
 
-    public List<Good> getGoods() {
+    /*public List<Good> getGoods() {
         return goods;
-    }
+    }*/
 
     public List<Document> getDocuments() {
         return documents;

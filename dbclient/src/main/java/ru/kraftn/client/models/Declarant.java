@@ -1,7 +1,5 @@
 package ru.kraftn.client.models;
 
-import ru.kraftn.client.utils.AbleToGiveId;
-
 import javax.persistence.*;
 
 @Entity

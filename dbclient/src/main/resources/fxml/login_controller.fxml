@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 
-<FlowPane alignment="CENTER" orientation="VERTICAL" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kraftn.client.controllers.LoginController">
+<FlowPane fx:id="fpLayout" alignment="CENTER" orientation="VERTICAL" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kraftn.client.controllers.LoginController">
    <children>
       <Label prefWidth="300.0" text="Введите логин:">
          <FlowPane.margin>

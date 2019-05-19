@@ -1,4 +1,4 @@
-group 'ru.overtired'
+group 'ru.kraftn'
 version '1.0'
 
 buildscript {
@@ -28,6 +28,6 @@ dependencies {
 apply plugin: 'javafx-gradle-plugin'
 
 jfx {
-    mainClass = 'ru.oveertired.JavaFxApp'
-    vendor = 'Perfect student from MIS&S'
+    mainClass = 'ru.kraftn.client.StartApp'
+    vendor = 'Nikita MIS&S'
 }

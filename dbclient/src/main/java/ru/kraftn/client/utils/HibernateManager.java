@@ -4,10 +4,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.kraftn.client.models.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,7 +16,6 @@ public class HibernateManager {
     private static String password;
 
     private EntityManager entityManager;
-    private UserInformation userInformation = null;
 
     private HibernateManager() {
         SessionFactory sessionFactory = buildSessionFactory();
@@ -26,10 +24,6 @@ public class HibernateManager {
 
     public static HibernateManager getInstance() {
         if (instance == null) {
-            if (loginName.isEmpty() || password.isEmpty()){
-                throw new RuntimeException("Empty username or login");
-            }
-
             instance = new HibernateManager();
         }
         return instance;
@@ -49,24 +43,14 @@ public class HibernateManager {
 
         Configuration configuration = new Configuration();
         //Добавить классы с аннотациями hibernate
-        configuration.addAnnotatedClass(Good.class);
-        configuration.addAnnotatedClass(Document.class);
-        configuration.addAnnotatedClass(Cooperator.class);
-        configuration.addAnnotatedClass(CustomsProcedure.class);
-        configuration.addAnnotatedClass(Declarant.class);
-        configuration.addAnnotatedClass(Duty.class);
-        configuration.addAnnotatedClass(ResultOfProcedure.class);
-        configuration.addAnnotatedClass(SubmittedDocument.class);
-        configuration.addAnnotatedClass(SubmittedDuty.class);
-        configuration.addAnnotatedClass(Unit.class);
-        configuration.addAnnotatedClass(CategoryOfGood.class);
+        RoleManager.getInstance().addClassesToHibernate(configuration);
 
         configuration.addProperties(dbConnectionProperties);
 
         return configuration.buildSessionFactory();
     }
 
-    public static void close(){
+    public static void close() {
         instance = null;
     }
 
@@ -86,27 +70,6 @@ public class HibernateManager {
         return password;
     }
 
-    public String getRoleName(){
-        if (null == userInformation){
-            userInformation = getUserInformation().get(0);
-        }
-        return userInformation.getRoleName();
-    }
-
-    public String getUserName(){
-        if (null == userInformation){
-            userInformation = getUserInformation().get(0);
-        }
-        return userInformation.getUserName();
-    }
-
-    private List<UserInformation> getUserInformation() {
-        Query nativeQuery = entityManager.createNativeQuery(
-                "declare @x nvarchar(128); set @x = (select USER_NAME()); execute sp_helpuser @x;",
-                "userInformation");
-        return nativeQuery.getResultList();
-    }
-
     public void beginTransaction() {
         entityManager.getTransaction().begin();
     }
@@ -116,25 +79,79 @@ public class HibernateManager {
     }
 
     public void save(Object entity) {
-       entityManager.persist(entity);
+        beginTransaction();
+        entityManager.persist(entity);
+        endTransaction();
     }
 
-    public void remove(Object entity){
+    public void remove(Object entity) {
+        beginTransaction();
         entityManager.remove(entity);
+        endTransaction();
     }
 
-    public <T> List<T> getAllObjects(Class<T> objectClass){
+    public void rollBack(){
+        entityManager.getTransaction().rollback();
+    }
+
+    public <T> List<T> getAllObjects(Class<T> objectClass) {
+        beginTransaction();
         TypedQuery<T> userQuery = entityManager.createQuery("Select x from " + objectClass.getName() + " x",
                 objectClass);
-        return userQuery.getResultList();
+        List<T> result = userQuery.getResultList();
+        endTransaction();
+        return result;
     }
 
-    /*public Good getGood(){
-        return entityManager.find(Good.class, 1);
-    }*/
+    public <T> List<T> getAllRefreshedObjects(Class<T> objectClass) {
+        beginTransaction();
+        TypedQuery<T> userQuery = entityManager.createQuery("Select x from " + objectClass.getName() + " x",
+                objectClass);
+        List<T> objects = userQuery.getResultList();
 
-    public List<Unpaid> getUnpaid() {
-        Query nativeQuery = entityManager.createNativeQuery("execute GetNotPaidDuties", "unpaid");
-        return nativeQuery.getResultList();
+        for (T object : objects) {
+            entityManager.refresh(object);
+        }
+        endTransaction();
+        return objects;
+    }
+
+    public <T> T findByID(Class<T> objectClass, int id) {
+        beginTransaction();
+        T result = entityManager.find(objectClass, id);
+        endTransaction();
+        return result;
+    }
+
+    public List<Paid> getPaid(int interval) {
+        beginTransaction();
+        Query nativeQuery = entityManager.createNativeQuery("execute GetPaidDuties ?1",
+                "paid");
+        nativeQuery.setParameter(1, interval);
+        List<Paid> result = nativeQuery.getResultList();
+        endTransaction();
+        return result;
+    }
+
+    public List<CertainResult> getCertainResult(LocalDate beginDate, LocalDate endDate, String result) {
+        beginTransaction();
+        Query nativeQuery = entityManager.createNativeQuery("execute GetResults ?1, ?2, ?3",
+                "certainResult");
+        nativeQuery.setParameter(1, beginDate);
+        nativeQuery.setParameter(2, endDate);
+        nativeQuery.setParameter(3, result);
+        List<CertainResult> resultQuery = nativeQuery.getResultList();
+        endTransaction();
+        return resultQuery;
+    }
+
+    public List<MissingDocument> getMissingDocuments(int numberProcedure) {
+        beginTransaction();
+        Query nativeQuery = entityManager.createNativeQuery("execute GetMissingDocuments ?1",
+                "missingDocument");
+        nativeQuery.setParameter(1, numberProcedure);
+        List<MissingDocument> resultQuery = nativeQuery.getResultList();
+        endTransaction();
+        return resultQuery;
     }
 }

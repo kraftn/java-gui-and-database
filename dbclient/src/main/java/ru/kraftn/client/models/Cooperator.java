@@ -1,9 +1,6 @@
 package ru.kraftn.client.models;
 
-import ru.kraftn.client.utils.AbleToGiveId;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "Cooperator")
@@ -25,9 +22,9 @@ public class Cooperator implements AbleToGiveId {
     @Column(name = "Position", nullable = false)
     private String position;
 
-    @OneToMany(orphanRemoval = true)
+    /*@OneToMany(orphanRemoval = true)
     @JoinColumn(name = "Cooperator")
-    private List<ResultOfProcedure> resultsOfProcedure;
+    private List<ResultOfProcedure> resultsOfProcedure;*/
 
     public int getId() {
         return id;
@@ -69,9 +66,9 @@ public class Cooperator implements AbleToGiveId {
         this.position = position;
     }
 
-    public List<ResultOfProcedure> getResultsOfProcedure() {
+    /*public List<ResultOfProcedure> getResultsOfProcedure() {
         return resultsOfProcedure;
-    }
+    }*/
 
     @Override
     public String toString() {

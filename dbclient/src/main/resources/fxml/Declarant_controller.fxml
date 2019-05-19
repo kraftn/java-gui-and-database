@@ -6,8 +6,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.kraftn.client.controllers.DeclarantController">
   <columnConstraints>
@@ -29,7 +29,7 @@
    <children>
       <Label text="Фамилия" />
       <Label text="Имя" GridPane.columnIndex="1" />
-      <Label text="Отчество" GridPane.columnIndex="2" />
+      <Label text="Отчество*" GridPane.columnIndex="2" />
       <Label text="Национальность" GridPane.columnSpan="3" GridPane.rowIndex="2" />
       <Label text="Документ, удостоверяющий личность" GridPane.columnSpan="2" GridPane.rowIndex="4" />
       <Label text="Номер документа" GridPane.columnIndex="2" GridPane.rowIndex="4" />
@@ -50,16 +50,16 @@
          </GridPane.margin></TextField>
       <TextField fx:id="tfNumberDocument" promptText="Номер" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       <TextField fx:id="tfPhone" promptText="Телефон" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
+      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <children>
-            <Button mnemonicParsing="false" onAction="#onOk" text="ОК">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
+            <Button mnemonicParsing="false" onAction="#ok" text="ОК" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="70.0" />
+               </StackPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onCancel" text="Отмена" />
+            <Button mnemonicParsing="false" onAction="#cancel" text="Отмена" StackPane.alignment="CENTER_RIGHT" />
          </children>
-      </HBox>
+      </StackPane>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

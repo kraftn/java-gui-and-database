@@ -6,10 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import ru.kraftn.client.controllers.BlankController;
-import ru.kraftn.client.utils.AbleToGiveId;
+import ru.kraftn.client.models.AbleToGiveId;
 import ru.kraftn.client.utils.InflateUtils;
-
-import java.lang.reflect.InvocationTargetException;
+import ru.kraftn.client.utils.RoleManager;
 
 public class NavigationManager {
 
@@ -27,16 +26,18 @@ public class NavigationManager {
         final Parent root = InflateUtils.loadFxml("/fxml/login_controller.fxml");
         final Scene scene = createSceneWithThisNavigationManager(root);
         stage.setScene(scene);
+        stage.setTitle("Вход");
     }
 
     public void goToBlankScene() {
         final Parent root = InflateUtils.loadFxml("/fxml/blank_controller.fxml");
         final Scene scene = createSceneWithThisNavigationManager(root);
         stage.setScene(scene);
+        setTitle();
     }
 
-    public void goToTableScene(TableView table) {
-        BlankController blankController = new BlankController(table);
+    public void goToTableScene(TableView table, String title) {
+        BlankController blankController = new BlankController(table, title);
         final Parent root = InflateUtils.loadFxmlWithCustomController("/fxml/blank_controller.fxml", blankController);
         final Scene scene = createSceneWithThisNavigationManager(root);
         stage.setScene(scene);
@@ -67,7 +68,7 @@ public class NavigationManager {
         stage.setScene(scene);
     }
 
-    public void goToCreateScene(Class<? extends AbleToGiveId> contentClass) {
+    public void goToCreateScene(Class<?> contentClass) {
         String fullClassName = contentClass.getName();
         String shortClassName = fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
 
@@ -80,5 +81,12 @@ public class NavigationManager {
         final Scene scene = new Scene(root);
         scene.setUserData(this);
         return scene;
+    }
+
+    private void setTitle(){
+        String userName = RoleManager.getInstance().findUserName();
+        String roleName = RoleManager.getInstance().findRoleName();
+        String title = String.format("Пользователь %s (%s)", userName, roleName);
+        stage.setTitle(title);
     }
 }

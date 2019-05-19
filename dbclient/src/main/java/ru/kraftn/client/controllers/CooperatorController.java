@@ -5,11 +5,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import org.hibernate.service.spi.ServiceException;
+import ru.kraftn.client.models.CategoryOfGood;
 import ru.kraftn.client.models.Cooperator;
 import ru.kraftn.client.navigation.NavigationManager;
 import ru.kraftn.client.utils.HibernateManager;
+import ru.kraftn.client.utils.InflateUtils;
 import ru.kraftn.client.utils.TableManager;
 
+import javax.persistence.PersistenceException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,7 +43,7 @@ public class CooperatorController implements Initializable {
     }
 
     @FXML
-    public void onOk(){
+    public void ok(){
         if (null == data){
             data = new Cooperator();
         }
@@ -50,22 +54,16 @@ public class CooperatorController implements Initializable {
 
         HibernateManager hibernate = HibernateManager.getInstance();
 
-        hibernate.beginTransaction();
         hibernate.save(data);
-        hibernate.endTransaction();
 
-        List<Cooperator> content = hibernate.getAllObjects(Cooperator.class);
-        TableView<Cooperator> table = TableManager.getTableWithContent(TableManager.headerCooperator, Cooperator.class,
-                content);
-        NavigationManager.from(tfSurname).goToTableScene(table);
+        TableView<Cooperator> table = TableManager.getTableWithContentAndMenu(TableManager.headerCooperator, Cooperator.class);
+        NavigationManager.from(tfSurname).goToTableScene(table, "Таможенные инмпекторы");
     }
 
     @FXML
-    public void onCancel(){
+    public void cancel(){
         HibernateManager hibernate = HibernateManager.getInstance();
-        List<Cooperator> content = hibernate.getAllObjects(Cooperator.class);
-        TableView<Cooperator> table = TableManager.getTableWithContent(TableManager.headerCooperator, Cooperator.class,
-                content);
-        NavigationManager.from(tfSurname).goToTableScene(table);
+        TableView<Cooperator> table = TableManager.getTableWithContentAndMenu(TableManager.headerCooperator, Cooperator.class);
+        NavigationManager.from(tfSurname).goToTableScene(table, "Таможенные инмпекторы");
     }
 }

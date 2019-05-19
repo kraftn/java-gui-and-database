@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "List_Of_Duties")
-public class Duty {
+public class Duty implements AbleToGiveId{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

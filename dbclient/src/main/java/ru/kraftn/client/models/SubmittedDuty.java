@@ -1,10 +1,7 @@
 package ru.kraftn.client.models;
 
-import ru.kraftn.client.utils.AbleToGiveId;
-
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Customs_Duties")
@@ -29,7 +26,7 @@ public class SubmittedDuty implements AbleToGiveId {
     private int paid;
 
     @Column(name = "Payment_Date")
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     public int getId() {
         return id;
@@ -71,11 +68,11 @@ public class SubmittedDuty implements AbleToGiveId {
         this.paid = paid;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }
