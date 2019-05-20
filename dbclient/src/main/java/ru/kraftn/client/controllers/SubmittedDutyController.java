@@ -56,7 +56,7 @@ public class SubmittedDutyController implements Initializable {
 
     @FXML
     public void ok() {
-        if (!checkPaid.isDisabled() && null == dpDatePaid.getValue()){
+        if (checkPaid.isSelected() && null == dpDatePaid.getValue()){
             InflateUtils.createAndShowAlert("Укажите дату оплаты");
             return;
         }

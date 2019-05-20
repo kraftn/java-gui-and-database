@@ -333,8 +333,8 @@ public class TableManager {
         table.setItems(observableList);
     }
 
-    private static void setContextMenuToTable(TableView<? extends AbleToGiveId> table,
-                                              Class<? extends AbleToGiveId> elementContentClass) {
+    private static <T extends AbleToGiveId> void setContextMenuToTable(TableView<T> table,
+                                              Class<T> elementContentClass) {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem menuItemCreate = new MenuItem("Создать");
         MenuItem menuItemChange = new MenuItem("Изменить");
@@ -366,6 +366,7 @@ public class TableManager {
                         hibernate.remove(table.getItems().get(orderNumberChoice));
                     } catch (Exception e) {
                         InflateUtils.createAndShowAlert("Не удалось удалить запись");
+                        setContent(table, hibernate.getAllObjects(elementContentClass));
                         return;
                     }
                     table.getItems().remove(orderNumberChoice);
