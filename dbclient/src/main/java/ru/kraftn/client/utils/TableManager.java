@@ -365,7 +365,7 @@ public class TableManager {
                     try {
                         hibernate.remove(table.getItems().get(orderNumberChoice));
                     } catch (Exception e) {
-                        InflateUtils.createAndShowAlert("Не удалось удалить запись");
+                        InflateUtils.createAndShowAlert("Не удалось удалить запись.");
                         setContent(table, hibernate.getAllObjects(elementContentClass));
                         return;
                     }

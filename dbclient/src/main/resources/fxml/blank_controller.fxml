@@ -19,7 +19,7 @@
                   <Menu mnemonicParsing="false" text="Прохождение грузов">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#showTableCustomsProcedures" text="Заявления" />
-                        <MenuItem mnemonicParsing="false" onAction="#showTableDuties" text="Пошлины" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTableDuties" text="Пошлины, подлежащие уплате" />
                         <MenuItem mnemonicParsing="false" onAction="#showTableDocuments" text="Поданные документы" />
                         <MenuItem mnemonicParsing="false" onAction="#showTableResults" text="Результаты рассмотрения" />
                     </items>
@@ -27,8 +27,8 @@
                   <Menu mnemonicParsing="false" text="Список возможных значений">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#showTableCategories" text="Категории грузов" />
-                        <MenuItem mnemonicParsing="false" onAction="#showTablePossibleDocuments" text="Возможные документы" />
-                      <MenuItem mnemonicParsing="false" onAction="#showTablePossibleDuties" text="Возможные пошлины" />
+                        <MenuItem mnemonicParsing="false" onAction="#showTablePossibleDocuments" text="Документы" />
+                      <MenuItem mnemonicParsing="false" onAction="#showTablePossibleDuties" text="Пошлины" />
                     </items>
                   </Menu>
             </items>

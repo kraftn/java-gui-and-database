@@ -58,7 +58,7 @@ public class ResultOfProcedureController implements Initializable {
     public void ok() {
         if (null == data) {
             if (null == cbCustomsProcedure.getValue()) {
-                InflateUtils.createAndShowAlert("Выберите заявление");
+                InflateUtils.createAndShowAlert("Выберите заявление.");
                 return;
             }
 
@@ -75,7 +75,7 @@ public class ResultOfProcedureController implements Initializable {
             hibernate.rollBack();
             data = null;
             InflateUtils.createAndShowAlert(
-                    "Результат по данному заявлению уже существует");
+                    "Результат по данному заявлению уже существует.");
             return;
         } catch (PersistenceException e) {
             Throwable errorNext = e;
@@ -83,16 +83,16 @@ public class ResultOfProcedureController implements Initializable {
                 errorNext = errorNext.getCause();
             }
             if (!(errorNext instanceof SQLServerException)) {
-                InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *)");
+                InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *).");
                 hibernate.rollBack();
             } else if (errorNext.getMessage().contains(
                     "Не удается вставить повторяющийся ключ в объект \"dbo.Result_Of_Procedure\".")) {
                 InflateUtils.createAndShowAlert(
-                        "Результат по данному заявлению уже существует");
+                        "Результат по данному заявлению уже существует.");
             } else if (errorNext.getMessage().equals("Транзакция завершилась в триггере. Выполнение пакета прервано.")
                     || errorNext.getMessage().equals("Результирующий набор создан для обновления.")) {
                 InflateUtils.createAndShowAlert(
-                        "Данное заявление не может быть одобрено, так как по нему имеются неоплаченные пошлины или недостающие документы");
+                        "Данное заявление не может быть одобрено, так как по нему имеются неоплаченные пошлины или недостающие документы.");
             } else {
                 InflateUtils.createAndShowAlert(errorNext.getMessage());
             }

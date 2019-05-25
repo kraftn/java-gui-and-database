@@ -16,7 +16,7 @@ public class FindResultController {
 
     public FindResultController(Dialog dialog) {
         dialog.setTitle("Найти информацию о декларантах для заявлений с заданным результатом");
-        dialog.setHeaderText("Укажите необходимые параметры поиска");
+        dialog.setHeaderText("Укажите необходимые параметры поиска:");
         ButtonType bOk = new ButtonType("ОК", ButtonBar.ButtonData.OK_DONE);
         ButtonType bCancel = new ButtonType("Отмена", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(bOk, bCancel);

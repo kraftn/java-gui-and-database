@@ -15,11 +15,11 @@ public class LoginController {
     PasswordField pfPassword;
 
     @FXML
-    private void enter() throws InterruptedException {
+    private void enter() {
         String loginName = tfLogin.getText();
         String password = pfPassword.getText();
         if (loginName.isEmpty() || password.isEmpty()) {
-            InflateUtils.createAndShowAlert("Введите логин и пароль");
+            InflateUtils.createAndShowAlert("Введите логин и пароль.");
             return;
         }
         HibernateManager.setLoginName(loginName);

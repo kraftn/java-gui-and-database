@@ -74,7 +74,8 @@ public class DeclarantController implements Initializable {
             if (errorNext instanceof SQLServerException
                     && errorNext.getMessage().equals("Транзакция завершилась в триггере. Выполнение пакета прервано.")) {
                 InflateUtils.createAndShowAlert(
-                        "Декларант с таким документом уже существует");
+                        "Декларант с таким документом уже существует.");
+                hibernate.rollBack();
             } else {
                 InflateUtils.createAndShowAlert(e.getMessage());
             }

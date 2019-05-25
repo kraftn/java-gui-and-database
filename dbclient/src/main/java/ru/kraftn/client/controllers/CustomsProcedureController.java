@@ -80,7 +80,7 @@ public class CustomsProcedureController implements Initializable {
             data.setAmountOfGoods(nf.parse(tfAmount.getText()).doubleValue());
             data.setWorthOfGoods(nf.parse(tfWorth.getText()).doubleValue());
         } catch (ParseException e) {
-            InflateUtils.createAndShowAlert("Неверное количество груза или его стоимость");
+            InflateUtils.createAndShowAlert("Неверное количество груза или его стоимость.");
             return;
         }
 
@@ -97,11 +97,11 @@ public class CustomsProcedureController implements Initializable {
                 errorNext = errorNext.getCause();
             }
             if (!(errorNext instanceof SQLServerException)) {
-                InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *)");
+                InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *).");
                 hibernate.rollBack();
             } else if (errorNext.getMessage().equals("Транзакция завершилась в триггере. Выполнение пакета прервано.")) {
                 InflateUtils.createAndShowAlert(
-                        "Отрицательное количество груза или его стоимость");
+                        "Неверное количество груза или его стоимость.");
             } else {
                 InflateUtils.createAndShowAlert(errorNext.getMessage());
             }

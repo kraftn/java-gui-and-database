@@ -13,7 +13,7 @@ public class StartApp extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         NavigationManager navigationManager = new NavigationManager(stage);
         navigationManager.goToLoginScene();
         stage.show();

@@ -68,7 +68,7 @@ public class BlankController implements Initializable {
     @FXML
     public void showTableDuties() {
         TableView table = TableManager.getTableSubmittedDuties();
-        NavigationManager.from(bpLayout).goToTableScene(table, "Пошлины, подлежащие оплате");
+        NavigationManager.from(bpLayout).goToTableScene(table, "Пошлины, подлежащие уплате");
     }
 
     @FXML
@@ -129,7 +129,7 @@ public class BlankController implements Initializable {
 
         if (resultDialog.isPresent()){
             if (null == resultDialog.get().getBeginDate() || null == resultDialog.get().getEndDate()){
-                InflateUtils.createAndShowAlert("Укажите все параметры");
+                InflateUtils.createAndShowAlert("Укажите все параметры.");
             } else {
                 List<CertainResult> content = HibernateManager.getInstance().getCertainResult(resultDialog.get().getBeginDate(),
                         resultDialog.get().getEndDate(), resultDialog.get().getResult());
@@ -178,7 +178,7 @@ public class BlankController implements Initializable {
             try {
                 resultInt = Integer.parseUnsignedInt(result.get());
             } catch (NumberFormatException e){
-                InflateUtils.createAndShowAlert("Неверное количество дней");
+                InflateUtils.createAndShowAlert("Введённые данные не являются числом, большим или равным 0.");
             }
 
             return resultInt;

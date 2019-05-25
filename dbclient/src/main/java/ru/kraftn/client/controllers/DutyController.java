@@ -63,7 +63,7 @@ public class DutyController implements Initializable {
         try {
             data.setValueOfDuty(nf.parse(tfValue.getText()).doubleValue());
         } catch (ParseException e) {
-            InflateUtils.createAndShowAlert("Неверная ставка пошлины");
+            InflateUtils.createAndShowAlert("Неверная ставка пошлины.");
             return;
         }
         data.setUnitOfMeasurement((Unit) cbValue.getValue());
@@ -76,11 +76,12 @@ public class DutyController implements Initializable {
                 errorNext = errorNext.getCause();
             }
             if (!(errorNext instanceof SQLServerException)) {
-                InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *)");
+                InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *).");
                 hibernate.rollBack();
             } else if (errorNext.getMessage().equals("Транзакция завершилась в триггере. Выполнение пакета прервано.")) {
                 InflateUtils.createAndShowAlert(
-                        "Отрицательная ставка пошлины");
+                        "Неверная ставка пошлины.");
+                hibernate.rollBack();
             } else {
                 InflateUtils.createAndShowAlert(errorNext.getMessage());
             }

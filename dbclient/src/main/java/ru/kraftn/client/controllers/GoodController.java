@@ -61,7 +61,7 @@ public class GoodController implements Initializable {
         try {
             hibernate.save(data);
         } catch (PersistenceException e) {
-            InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *)");
+            InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *).");
             hibernate.rollBack();
             data = hibernate.findByID(Good.class, data.getId());
 

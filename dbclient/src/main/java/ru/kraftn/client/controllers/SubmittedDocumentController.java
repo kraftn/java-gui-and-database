@@ -60,7 +60,7 @@ public class SubmittedDocumentController implements Initializable {
         try {
             hibernate.save(data);
         } catch (PersistenceException e) {
-            InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *)");
+            InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *).");
             hibernate.rollBack();
             data = hibernate.findByID(SubmittedDocument.class, data.getId());
 

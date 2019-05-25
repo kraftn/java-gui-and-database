@@ -57,7 +57,7 @@ public class SubmittedDutyController implements Initializable {
     @FXML
     public void ok() {
         if (checkPaid.isSelected() && null == dpDatePaid.getValue()){
-            InflateUtils.createAndShowAlert("Укажите дату оплаты");
+            InflateUtils.createAndShowAlert("Укажите дату оплаты.");
             return;
         }
 
@@ -72,7 +72,7 @@ public class SubmittedDutyController implements Initializable {
         try {
             hibernate.save(data);
         } catch (PersistenceException e) {
-            InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *)");
+            InflateUtils.createAndShowAlert("Заполните все обязательные поля (без *).");
             hibernate.rollBack();
             data = hibernate.findByID(SubmittedDuty.class, data.getId());
 
@@ -80,13 +80,13 @@ public class SubmittedDutyController implements Initializable {
         }
 
         TableView<SubmittedDuty> table = TableManager.getTableSubmittedDuties();
-        NavigationManager.from(cbCustomsProcedure).goToTableScene(table, "Пошлины, подлежащие оплате");
+        NavigationManager.from(cbCustomsProcedure).goToTableScene(table, "Пошлины, подлежащие уплате");
     }
 
     @FXML
     public void cancel() {
         TableView<SubmittedDuty> table = TableManager.getTableSubmittedDuties();
-        NavigationManager.from(cbCustomsProcedure).goToTableScene(table, "Пошлины, подлежащие оплате");
+        NavigationManager.from(cbCustomsProcedure).goToTableScene(table, "Пошлины, подлежащие уплате");
     }
 
     @FXML

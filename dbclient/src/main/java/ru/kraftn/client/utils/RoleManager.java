@@ -60,7 +60,7 @@ public class RoleManager {
             i++;
         }
         if (i == informationAllUsers.size()) {
-            throw new RuntimeException(String.format("Пользователя с логином %s не существует", loginName));
+            throw new RuntimeException(String.format("Пользователя с логином %s не существует.", loginName));
         } else {
             return informationAllUsers.get(i).getRoleName();
         }
@@ -76,7 +76,7 @@ public class RoleManager {
             i++;
         }
         if (i == informationAllUsers.size()) {
-            throw new RuntimeException(String.format("Пользователя с логином %s не существует", loginName));
+            throw new RuntimeException(String.format("Пользователя с логином %s не существует.", loginName));
         } else {
             return informationAllUsers.get(i).getUserName();
         }

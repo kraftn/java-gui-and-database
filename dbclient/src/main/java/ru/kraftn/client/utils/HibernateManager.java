@@ -12,6 +12,7 @@ import java.util.Properties;
 
 public class HibernateManager {
     private static HibernateManager instance = null;
+
     private static String loginName;
     private static String password;
 
@@ -20,13 +21,6 @@ public class HibernateManager {
     private HibernateManager() {
         SessionFactory sessionFactory = buildSessionFactory();
         entityManager = sessionFactory.createEntityManager();
-    }
-
-    public static HibernateManager getInstance() {
-        if (instance == null) {
-            instance = new HibernateManager();
-        }
-        return instance;
     }
 
     private SessionFactory buildSessionFactory() throws Error {
@@ -50,16 +44,22 @@ public class HibernateManager {
         return configuration.buildSessionFactory();
     }
 
-    public static void close() {
-        instance = null;
-    }
-
     public static void setLoginName(String newLoginName) {
         loginName = newLoginName;
     }
-
     public static void setPassword(String newPassword) {
         password = newPassword;
+    }
+
+    public static HibernateManager getInstance() {
+        if (instance == null) {
+            instance = new HibernateManager();
+        }
+        return instance;
+    }
+
+    public static void close() {
+        instance = null;
     }
 
     public static String getLoginName() {
