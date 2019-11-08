@@ -31,3 +31,6 @@ jfx {
     mainClass = 'ru.kraftn.client.StartApp'
     vendor = 'Nikita MIS&S'
 }
+
+apply plugin: 'application'
+mainClassName = 'ru.kraftn.client.StartApp'
